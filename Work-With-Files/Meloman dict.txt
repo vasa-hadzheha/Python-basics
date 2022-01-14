@@ -1,0 +1,3 @@
+System Of A Down={singers:{Serj Tankian, Daron Malakian, Shavo Odadjian, John Dolmayan},album:{Toxicity},songs:{Lonely Day,Sugar}}
+Sueco the Child = {singers:{Jad Antoury},album:{Your dream},songs:{fast}}
+$uicideboy$ = {singers:{Scrim; Ruby da Cherry},album:{STOP STARING AT THE SHADOWS},songs:{Introversion,And to those i love}}

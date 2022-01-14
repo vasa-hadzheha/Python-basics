@@ -1,0 +1,1 @@
+System Of A Down={singers:{Serj Tankian, Daron Malakian, Shavo Odadjian, John Dolmayan},album:{Toxicity},songs:{Lonely Day,Sugar}}
