@@ -11,7 +11,7 @@
 | [2.1](#exercise-21--list-warm-up) | List warm-up | indexing, slicing | — |
 | [2.2](#exercise-22--geometric-mean) | Geometric mean | list building, product accumulator | Lab 6.1 |
 | [2.3](#exercise-23--generate-then-filter) | Generate then filter | `if` inside a loop, index parity | Lab 6.2 |
-| [2.4](#exercise-24--vector-times-scalar) | Vector × scalar | comprehension | Lab 6.3 |
+| [2.4](#exercise-24--vector--scalar) | Vector × scalar | comprehension | Lab 6.3 |
 | [2.5](#exercise-25--sort-descending) | Sort descending | `sorted`, `reverse` | Lab 6.4 |
 | [2.6](#exercise-26--selective-matrix-sum) | Selective matrix sum | double loop, `range` step | Lab 7.1 |
 | [2.7](#exercise-27--replace-zeros-from-a-second-matrix) | Replace zeros from matrix B | two matrices in step | Lab 7.2 |

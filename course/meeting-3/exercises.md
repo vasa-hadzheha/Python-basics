@@ -21,7 +21,7 @@ Reference solutions: [`exercise-bank/meeting-3/`](../../exercise-bank/meeting-3/
 | [3.4](#exercise-34--pair-up-coordinates) | Pair up coordinates | line-indexed parsing | Checker |
 | [3.5](#exercise-35--sales-summary-from-csv-) | Sales summary from CSV 💼 | `DictReader`, typing, grouping |
 | [3.6](#exercise-36--validate-a-product-file-) | Validate a product file 💼 | rejects with reasons |
-| [3.7](#exercise-37--csv-to-sqlite-) | CSV → SQLite 💼 | schema, constraints, `executemany` |
+| [3.7](#exercise-37--csv--sqlite-) | CSV → SQLite 💼 | schema, constraints, `executemany` |
 | [3.8](#exercise-38--answer-five-questions-in-sql-) | Five questions in SQL 💼 | `GROUP BY`, `HAVING`, `JOIN` |
 | [3.9](#exercise-39--monthly-report-file-) | Monthly report file 💼 | formatted output |
 | [3.10](#exercise-310--incremental-load-) | Incremental load 💼 | upsert, idempotency |
