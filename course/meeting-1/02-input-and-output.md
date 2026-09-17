@@ -163,9 +163,15 @@ the quotes reveal it:
 
 A single value looks pointless. Stack them and the purpose appears:
 
-| `:.2f` — no width | `:10.2f` — width 10 |
-|---|---|
-| <pre>7.50<br>1234.50<br>89.12<br>0.75<br>45678.90</pre> | <pre>      7.50<br>   1234.50<br>     89.12<br>      0.75<br>  45678.90</pre> |
+```text
+:.2f  (no width)        :10.2f  (width 10)
+--------------------    --------------------
+7.50                          7.50
+1234.50                    1234.50
+89.12                        89.12
+0.75                          0.75
+45678.90                  45678.90
+```
 
 **The decimal points line up.** That is the entire point, and it only shows up across
 several lines — which is why testing one number tells you nothing.

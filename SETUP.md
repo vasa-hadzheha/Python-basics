@@ -78,6 +78,12 @@ old files.
 
 ---
 
+> **Reading the course in Obsidian?** See [OBSIDIAN.md](OBSIDIAN.md). The vault
+> settings are already committed, so opening this folder as a vault renders it the
+> way GitHub does.
+
+---
+
 ## 4. Create a virtual environment
 
 A *virtual environment* is a private folder of libraries for one project, so that
@@ -146,7 +152,7 @@ flowchart LR
     end
     subgraph REPL["The interactive shell (handy for quick checks)"]
         direction TB
-        R1["python3"] --> R2["&gt;&gt;&gt; prompt appears"]
+        R1["python3"] --> R2["the >>> prompt appears"]
         R2 --> R3["You type ONE line,<br/>it answers immediately"]
         R3 --> R4["exit() to leave"]
     end
@@ -224,9 +230,9 @@ executing it. Type `print(item)`, press Enter, and you get another `...` — not
 
 ```mermaid
 flowchart TD
-    A[">>> for item in items:"] --> B["... &nbsp;&nbsp;&nbsp;&nbsp;print(item)"]
+    A["prompt: for item in items:"] --> B["prompt ... then 4 spaces, print(item)"]
     B --> C{"prompt is now<br/><b>...</b>"}
-    C -->|"press Enter once"| D["... &nbsp;<i>(empty line)</i>"]
+    C -->|"press Enter once"| D["an empty ... line"]
     D -->|"Enter runs the block"| E["2<br/>6<br/>9<br/>..."]
     C -->|"keep typing"| B
 ```

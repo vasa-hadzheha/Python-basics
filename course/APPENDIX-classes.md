@@ -227,7 +227,7 @@ flowchart TD
     Q -- yes --> P["access WITHOUT brackets<br/>obj.thing"]
     Q -- no --> M["call WITH brackets<br/>obj.thing()"]
     P --> W1["obj.thing() -> TypeError"]
-    M --> W2["obj.thing -> prints<br/>&lt;bound method...&gt;"]
+    M --> W2["obj.thing prints<br/>bound method ..."]
 ```
 
 **If you ever see `<bound method ...>` in your output, you forgot the brackets.**

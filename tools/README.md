@@ -51,7 +51,9 @@ all relative links and anchors resolve
 ```
 
 External `http(s)://` links are skipped — checking those needs the network and would
-make the script flaky.
+make the script flaky. Fenced and inline code is skipped too, so a link quoted as an
+*example* (as [OBSIDIAN.md](../OBSIDIAN.md) does when showing GitHub's anchor format) is
+not mistaken for navigation.
 
 ## `check-tables.py`
 

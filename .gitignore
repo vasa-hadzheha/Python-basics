@@ -18,3 +18,19 @@ env/
 out/
 *.out.txt
 data/*.db
+
+# --- Obsidian ---
+# app.json and appearance.json ARE committed: they make the vault render the
+# same way GitHub does (see OBSIDIAN.md). Everything else is per-machine
+# state that would only cause conflicts.
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/graph.json
+.obsidian/hotkeys.json
+.obsidian/core-plugins*.json
+.obsidian/community-plugins.json
+.obsidian/plugins/
+.obsidian/themes/
+.obsidian/snippets/
+.trash/

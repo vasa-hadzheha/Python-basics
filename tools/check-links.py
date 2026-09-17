@@ -23,10 +23,23 @@ for p in md_files:
     anchors[p.resolve()] = found
 
 LINK = re.compile(r"\[([^\]]*)\]\(([^)\s]+)\)")
+
+
+def strip_code(text):
+    """Remove fenced code blocks and inline code.
+
+    Links inside them are illustrations, not navigation - OBSIDIAN.md quotes
+    a link as an example of GitHub's anchor format, and it is not meant to
+    resolve from there.
+    """
+    text = re.sub(r"^```.*?^```", "", text, flags=re.S | re.M)
+    return re.sub(r"`[^`\n]*`", "", text)
+
+
 bad = []
 checked = 0
 for p in md_files:
-    for text, target in LINK.findall(p.read_text(encoding="utf-8")):
+    for text, target in LINK.findall(strip_code(p.read_text(encoding="utf-8"))):
         if target.startswith(("http://", "https://", "mailto:")):
             continue
         checked += 1

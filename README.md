@@ -56,6 +56,8 @@ flowchart LR
 3. **[CHEATSHEET.md](course/CHEATSHEET.md)** — syntax reference: operators and their
    English names, what every symbol is called, and what the abbreviated names stand for.
 4. **[GLOSSARY.md](course/GLOSSARY.md)** — every term explained in one sentence, no jargon.
+5. **[OBSIDIAN.md](OBSIDIAN.md)** — reading the course in Obsidian instead of on GitHub
+   (three settings, already committed to the repo).
 
 **Presenting this to colleagues?** Two documents:
 

@@ -1,0 +1,12 @@
+{
+  "strictLineBreaks": true,
+  "readableLineLength": false,
+  "useMarkdownLinks": true,
+  "newLinkFormat": "relative",
+  "defaultViewMode": "preview",
+  "livePreview": true,
+  "showInlineTitle": true,
+  "showUnsupportedFiles": false,
+  "tabSize": 4,
+  "spellcheck": false
+}
