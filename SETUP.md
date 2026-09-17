@@ -221,6 +221,99 @@ The body of the loop must be indented. Depending on your Python version:
 Either way, no indent means
 `IndentationError: expected an indented block after 'for' statement on line 1`.
 
+### One-liners: what a `;` can and cannot join
+
+Blocks need several lines — so can you use a semicolon to squeeze it onto one?
+For `if`, **no**, and the error is worth understanding because it points at the answer.
+
+```python
+>>> age = 15; height = 168; if height >= 165: print("ok") else: print("small")
+  File "<python-input-39>", line 1
+    age = 15; height = 168; if height >= 165: print("ok") else: print("small")
+                            ^^
+SyntaxError: invalid syntax
+```
+
+**The caret points at `if`** — that is Python telling you exactly where it gave up.
+There are two separate problems in that line:
+
+**1. A `;` can only join *simple* statements.** Python divides statements in two:
+
+| | Examples | Can follow a `;`? |
+|---|---|---|
+| **simple** statements | `x = 1`, `print(x)`, `return`, `import math` | ✅ yes |
+| **compound** statements | `if`, `for`, `while`, `def`, `class`, `with`, `try` | ❌ **no** |
+
+A compound statement owns an indented block, so it must start its own line.
+
+```python
+age = 15; height = 168                    # ✅ both simple
+age = 15; height = 168; print(age)        # ✅ three simple
+height = 168; if height >= 165: ...       # ❌ SyntaxError at the "if"
+```
+
+**2. `else:` cannot share a line with the `if` body.** Even with the semicolons removed:
+
+```python
+if height >= 165: print("ok") else: print("small")     # ❌ SyntaxError at "else"
+```
+
+A single clause on one line is fine, but each clause header needs its own line:
+
+```python
+if height >= 165: print("ok you may go")               # ✅ legal (no else)
+```
+
+### So how do you write it on one line?
+
+Use a **conditional expression** — everyone calls it the *ternary*. It chooses between
+two **values**, and because it is an expression it can go anywhere a value can:
+
+```python
+>>> age = 15; height = 168; print("ok you may go" if height >= 165 else "You are small")
+ok you may go
+```
+
+Read it in the middle-first order it is written:
+
+```
+       "ok you may go"      if height >= 165      else      "You are small"
+       └── if true ──┘      └─ the question ─┘              └── if false ──┘
+```
+
+| | |
+|---|---|
+| `if` / `else` **statement** | chooses which **code to run** — needs its own lines |
+| `x if cond else y` **expression** | chooses between two **values** — fits on one line |
+
+It is genuinely useful beyond one-liners:
+
+```python
+label = "even" if value % 2 == 0 else "odd"
+status = "OK " if is_valid(code) else "BAD"
+price_text = f"{price:.2f}" if price is not None else "-"
+```
+
+> **Use it for two short values, and stop there.** Nesting them
+> (`a if p else b if q else c`) is where readability dies — write a normal `if` block,
+> or a small function, as in [Lesson 8](course/meeting-2/08-functions.md).
+
+And the honest answer for the original line: **write the block.** The semicolon version
+saves one line and costs the next reader ten seconds.
+
+```python
+age = 15
+height = 168
+
+if height >= 165:
+    print("ok you may go")
+else:
+    print("You are small")
+```
+
+Semicolons are legal in Python but essentially never used in real code — they exist for
+compatibility, not for style. If you want a one-liner, the ternary is the idiomatic tool.
+
 ### When to stop using the shell
 
 **Past about three lines, put it in a file.** You cannot go back and edit a line you have
@@ -239,6 +332,135 @@ and run it with `python3 loop.py`. Now you can fix a typo and re-run in two seco
 > anything longer than a few lines, and anything you want to keep.
 
 ---
+
+---
+
+## Keyboard shortcuts for the Python shell
+
+The shell is much less painful once you stop using only the arrow keys. These are
+**readline** bindings — the same ones work in `bash`, `psql`, `sqlite3` and most other
+terminal tools, so learning them once pays off everywhere.
+
+### Which shell am I in?
+
+Look at the filename in any error message:
+
+| Error says | You have | What you get |
+|------------|----------|--------------|
+| `File "<python-input-39>"` | **Python 3.13+**, the new REPL | colours, multi-line editing, F1–F3 |
+| `File "<stdin>"` | Python 3.12 or earlier | the classic REPL |
+
+Or just run `python3 --version`.
+
+### The five you will use every day
+
+| Keys | What it does |
+|------|--------------|
+| **Tab** | complete a name — type `it` + Tab, or `"".` + Tab to list every string method |
+| **↑** / **↓** | previous / next thing you typed |
+| **Ctrl-C** | stop code that is running, or abandon the line you are typing |
+| **Ctrl-L** | clear the screen (your history survives) |
+| **Ctrl-D** | leave the shell — faster than typing `exit()` |
+
+**Tab completion is the one people miss.** `math.` + Tab lists everything in the module;
+`items.` + Tab lists every list method. It is the fastest way to discover what an object
+can do, and no internet needed.
+
+### Moving along the line
+
+Stop holding ← for three seconds.
+
+| Keys | What it does |
+|------|--------------|
+| **Ctrl-A** | jump to the start of the line |
+| **Ctrl-E** | jump to the end of the line |
+| **Ctrl-←** / **Ctrl-→** | one word left / right |
+| **Alt-B** / **Alt-F** | one word **b**ack / **f**orward (same thing, works everywhere) |
+| **Ctrl-B** / **Ctrl-F** | one character back / forward |
+
+### Deleting
+
+| Keys | What it does |
+|------|--------------|
+| **Ctrl-W** | delete the word before the cursor |
+| **Ctrl-U** | delete from the cursor back to the start of the line |
+| **Ctrl-K** | delete from the cursor to the end of the line |
+| **Ctrl-Y** | paste back whatever you just deleted ("**y**ank") |
+| **Ctrl-T** | swap the two characters around the cursor — fixes `pirnt` |
+
+`Ctrl-U` then retyping is usually faster than backspacing a long line. And `Ctrl-U`
+followed by `Ctrl-Y` is a handy "park this line while I check something else".
+
+### History
+
+| Keys | What it does |
+|------|--------------|
+| **↑** / **↓** | step through previous lines |
+| **Ctrl-R** | **search** history — start typing, it finds the last match; Ctrl-R again for the one before |
+| **Ctrl-P** / **Ctrl-N** | same as ↑ / ↓ |
+
+**Ctrl-R is the big one.** Typed a long loop twenty lines ago? `Ctrl-R` then `for` brings
+it straight back instead of forty presses of ↑.
+
+### Python 3.13+ only — the new REPL
+
+These do nothing on 3.12 and earlier.
+
+| Keys | What it does |
+|------|--------------|
+| **F1** | help browser. Any key to leave |
+| **F2** | history **without** the `>>>` prompts and output — so you can select and copy real code |
+| **F3** | paste mode, for pasting a whole indented block without the auto-indent fighting you |
+| **↑** inside a block | move up through the *lines of the block* you are editing, not through history |
+| `exit` / `quit` | work **without** the brackets (older versions need `exit()`) |
+
+**F3 solves a genuine annoyance.** Paste an indented block into the old REPL and its
+auto-indent adds to your pasted indentation, so everything ends up wrong. F3 turns that
+off for the paste, then you press it again to go back.
+
+**F2 is the one to remember for this course** — when you have worked something out
+interactively and want it in a file, F2 gives you clean, copyable code.
+
+### Stopping things
+
+| Keys | What it does |
+|------|--------------|
+| **Ctrl-C** | interrupt. This is how you kill an infinite loop — see [Lesson 4](course/meeting-1/04-while-loops.md) |
+| **Ctrl-C** on an empty prompt | clear the line; it does **not** exit |
+| **Ctrl-D** | exit (on an empty line) |
+| **Ctrl-Z** | ⚠️ on Linux/macOS this **suspends** Python rather than closing it — type `fg` to bring it back |
+
+### Windows and macOS differences
+
+| | Note |
+|---|---|
+| **Windows** | exit with **Ctrl-Z** then **Enter**, not Ctrl-D |
+| **macOS** | **Alt** is the **Option** key. If `Alt-B` does nothing, either turn on *Use Option as Meta key* in Terminal → Settings → Profiles → Keyboard, or press **Esc** then **B** — `Esc` then a key works wherever `Alt` does |
+| **Any terminal** | if a Ctrl shortcut does nothing, your terminal has probably claimed it — check its own keyboard settings |
+
+### Worth knowing
+
+**Your history survives restarts.** It is kept in `~/.python_history`, so `Ctrl-R` still
+finds what you typed yesterday.
+
+**`_` holds the last result** — handy for chaining quick checks:
+
+```bash
+>>> 7 / 2
+3.5
+>>> _ * 2
+7.0
+```
+
+**`help()` and `dir()` are offline documentation:**
+
+```bash
+>>> help(str.strip)          # what it does, and its arguments
+>>> dir("")                  # every method a string has
+>>> "".strip.__doc__         # the docstring alone
+```
+
+`help()` opens a pager — press **q** to leave it. That trips everyone up once.
 
 ## When something goes wrong
 

@@ -177,7 +177,31 @@ x in [1, 2, 3]
 if my_list:          # "if not empty" — 0, "", [], None are falsy
 ```
 
+### Conditional expression (the "ternary") — one line, chooses a VALUE
+
+```python
+label = "even" if value % 2 == 0 else "odd"
+print("ok" if height >= 165 else "too small")
+text = f"{price:.2f}" if price is not None else "-"
+```
+
+|  | Chooses | Fits on one line? |
+|---|---|---|
+| `if` / `else` **statement** | which **code runs** | no — each clause needs its own line |
+| `x if cond else y` **expression** | between two **values** | yes |
+
+```python
+height = 168; if height >= 165: print("ok") else: print("small")   # ✗ SyntaxError
+height = 168; print("ok" if height >= 165 else "small")             # ✓
+if height >= 165: print("ok")                                      # ✓ legal, but no else
+```
+
+A `;` joins only **simple** statements (`x = 1`, `print(x)`). `if`, `for`, `while`,
+`def`, `class` own a block, so they must start their own line — see
+[SETUP](../SETUP.md#one-liners-what-a--can-and-cannot-join).
+
 ## Loops
+
 
 ```python
 for i in range(5):            # 0 1 2 3 4  ← 5 EXCLUDED
