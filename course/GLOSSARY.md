@@ -9,6 +9,9 @@ is linked.
 
 ## A
 
+**abbreviations** — why Python's names are so short (`sqrt`, `fabs`, `kwargs`) and what
+each stands for: see [the cheatsheet](CHEATSHEET.md#abbreviations-decoded).
+
 **accumulator** — a variable that starts empty and grows on each pass of a loop; start
 at `0` for a sum or count, `1` for a product. [L4](meeting-1/04-while-loops.md)
 

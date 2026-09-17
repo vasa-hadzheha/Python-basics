@@ -139,6 +139,229 @@ colleague. Where British and American English differ, both are given.
 | `=` is **not** equality | `=` assigns, `==` compares |
 | `\` is **not** division | `\` escapes, `/` divides |
 
+---
+
+## Abbreviations decoded
+
+Python inherited a lot of short names from C. Here is what they stand for — and, first,
+how to look up any name yourself without leaving the terminal.
+
+### Find out yourself — three commands
+
+```bash
+>>> import math
+>>> help(math.sqrt)          # a sentence explaining it. Press q to leave
+Return the square root of x.
+
+>>> math.sqrt.__doc__        # the same sentence, no pager
+'Return the square root of x.'
+
+>>> math.<Tab>               # lists every name in the module
+>>> dir(math)                # the same, as a list
+```
+
+**`math.` then Tab is the fastest discovery tool in Python.** It shows what exists;
+`help()` then says what each one does. No internet needed. `dir("")` lists every string
+method; `dir([])` every list method.
+
+### `math` — the maths module
+
+| Name | Stands for | Does |
+|------|-----------|------|
+| `sqrt` | **sq**uare **r**oo**t** | `sqrt(9)` → `3.0` |
+| `isqrt` | **i**nteger **sq**uare **r**oo**t** | `isqrt(10)` → `3` — whole part only |
+| `cbrt` | **c**u**b**e **r**oo**t** | `cbrt(8)` → `2.0` |
+| `fabs` | **f**loat **abs**olute value | always returns a float |
+| `ceil` | **ceil**ing | rounds **up**: `ceil(2.1)` → `3` |
+| `floor` | floor | rounds **down**: `floor(2.9)` → `2` |
+| `trunc` | **trunc**ate | chops toward zero — same as `int()` |
+| `exp` | **exp**onential | `e` to the power of x |
+| `log` | **log**arithm | natural log; `log(x, base)` for another base |
+| `log2` `log10` | **log**arithm base 2 / 10 | |
+| `log1p` | **log** of **1** **p**lus x | accurate for tiny x |
+| `expm1` | **exp** **m**inus **1** | accurate for tiny x |
+| `fmod` | **f**loat **mod**ulo | like `%`, but C semantics for negatives |
+| `modf` | **mod**ulus and **f**raction | `modf(3.5)` → `(0.5, 3.0)` |
+| `hypot` | **hypot**enuse | `hypot(3, 4)` → `5.0` |
+| `dist` | **dist**ance | Euclidean distance between two points |
+| `gcd` | **g**reatest **c**ommon **d**ivisor | |
+| `lcm` | **l**owest **c**ommon **m**ultiple | |
+| `comb` | **comb**inations | choose k from n, order ignored |
+| `perm` | **perm**utations | choose k from n, order matters |
+| `prod` | **prod**uct | multiplies an iterable |
+| `fsum` | **f**loat **sum** | accurate sum; avoids float drift |
+| `isnan` | **is** **n**ot **a** **n**umber | `nan` is the "missing/invalid" float |
+| `isinf` | **is** **inf**inite | |
+| `isclose` | **is close** | float comparison with a tolerance built in |
+| `copysign` | **copy** the **sign** | magnitude of x, sign of y |
+| `degrees` `radians` | — | convert between angle units |
+| `factorial` | — | `factorial(5)` → `120` (that is `5!`) |
+| `pi` `e` `tau` `inf` `nan` | — | constants, not functions — no brackets |
+
+### Built-in functions
+
+| Name | Stands for | Does |
+|------|-----------|------|
+| `len` | **len**gth | number of items |
+| `abs` | **abs**olute value | keeps the type: `abs(-5)` → `5` |
+| `str` | **str**ing | text |
+| `int` | **int**eger | whole number |
+| `float` | **float**ing-point | decimal — "floating" point, it can move |
+| `bool` | **bool**ean | after George Boole. `True` / `False` |
+| `repr` | **repr**esentation | the developer view; `{x!r}` in an f-string |
+| `dir` | **dir**ectory (of names) | what does this object have? |
+| `vars` | **var**iable**s** | an object's attributes as a dict |
+| `id` | **id**entity | the object's unique number |
+| `ord` `chr` | **ord**inal / **char**acter | `ord("A")` → `65`, `chr(65)` → `"A"` |
+| `bin` `hex` `oct` | **bin**ary / **hex**adecimal / **oct**al | base 2 / 16 / 8 as text |
+| `pow` | **pow**er | same as `**` |
+| `divmod` | **div**ide and **mod**ulo | `divmod(7, 2)` → `(3, 1)` — both at once |
+| `iter` `next` | **iter**ator | step through something manually |
+| `enumerate` | **enumerate** | pairs each item with its position |
+| `eval` `exec` | **eval**uate / **exec**ute | run text as code. ⚠️ never on untrusted input |
+| `isinstance` | **is** an **instance** of | type check |
+| `getattr` `setattr` `hasattr` | get / set / has **attr**ibute | access an attribute by name |
+
+> **`divmod` is underused.** `divmod(n, 10)` gives you the last digit *and* the rest in
+> one call — exactly the digit-peeling loop from [Lesson 4](meeting-1/04-while-loops.md).
+
+### `str` methods whose names mislead
+
+| Name | Stands for | Watch out |
+|------|-----------|-----------|
+| `strip` | strip whitespace from **both** ends | not "delete all spaces" — inner spaces stay |
+| `lstrip` `rstrip` | **l**eft / **r**ight strip | one end only |
+| `ljust` `rjust` | **l**eft / **r**ight **just**ify | pads to a width |
+| `zfill` | **z**ero **fill** | `"7".zfill(3)` → `"007"` — keeps leading zeros! |
+| `casefold` | — | a more aggressive `.lower()`, for comparing |
+| `partition` | — | splits into exactly **three** parts, once |
+| `rsplit` | **r**ight **split** | splits from the end |
+| `removeprefix` | — | 3.9+. Safer than slicing |
+| `title` | — | `"Title Case"` |
+| `expandtabs` | — | turns tabs into spaces |
+
+### `isdigit` vs `isdecimal` vs `isnumeric` — they are not the same
+
+This matters whenever you check text before converting it to a number:
+
+| text | what it is | `isdecimal()` | `isdigit()` | `isnumeric()` | `float()` |
+|------|-----------|---------------|-------------|---------------|-----------|
+| `"5"` | ASCII five | True | True | True | `5.0` |
+| `"٥"` | Arabic-Indic five | True | True | True | `5.0` |
+| `"²"` | superscript two | **False** | **True** | True | **ValueError** |
+| `"½"` | one half | False | False | **True** | **ValueError** |
+| `"Ⅴ"` | Roman numeral five | False | False | **True** | **ValueError** |
+| `"-5"` | minus five | False | False | False | `-5.0` |
+| `"5.5"` | a decimal | False | False | False | `5.5` |
+| `""` | empty | False | False | False | **ValueError** |
+
+Read the `"²"` row carefully: **`isdigit()` says yes and `float()` refuses.** A check
+built on `isdigit()` would pass and the conversion on the next line would crash. The last
+three rows matter too — no `is*` method accepts a minus sign or a decimal point.
+
+> **So do not pre-test text you are about to convert.** Try the conversion and catch the
+> failure — `float()` is the only authority on what `float()` accepts:
+> ```python
+> try:
+>     value = float(raw)
+> except ValueError:
+>     ...            # not a number
+> ```
+> `isdigit()` is fine for text that **stays** text — a 13-digit product code you never do
+> arithmetic on. `isdecimal()` is the strictest of the three.
+
+### `statistics`, `os.path`, `random`
+
+| Name | Stands for |
+|------|-----------|
+| `mean` `median` `mode` | average / middle value / most common |
+| `stdev` `pstdev` | **st**andard **dev**iation — **s**ample / **p**opulation |
+| `variance` `pvariance` | sample / **p**opulation variance |
+| `fmean` | **f**loat **mean** — faster |
+| `abspath` | **abs**olute **path** |
+| `basename` `dirname` | the filename / the folder part |
+| `splitext` | **split** the **ext**ension: `("report", ".csv")` |
+| `expanduser` | turns `~` into your home folder |
+| `normpath` `realpath` | tidy the path / resolve every link |
+| `randint` | **rand**om **int**eger — **both** ends included |
+| `randrange` | like `range` — the end is **excluded** |
+| `choice` `choices` `sample` | one item / k **with** repeats / k **without** repeats |
+| `uniform` | a random float, **uniform**ly distributed |
+| `gauss` | **Gauss**ian (normal) distribution |
+| `shuffle` | reorders **in place**, returns `None` |
+
+### Jargon you will meet in code
+
+| Name | Stands for |
+|------|-----------|
+| `args` | **arg**ument**s** — `*args` collects extra positional ones |
+| `kwargs` | **k**ey**w**ord **arg**ument**s** — `**kwargs` collects named ones |
+| `__init__` | **init**ialise — the constructor. Say "**dunder** init" |
+| `self` | this instance. Not a keyword — just the convention |
+| `cls` | **cl**a**ss** — the convention in a `@classmethod` |
+| `csv` | **c**omma-**s**eparated **v**alues |
+| `tsv` | **t**ab-**s**eparated **v**alues |
+| `json` | **J**ava**S**cript **O**bject **N**otation |
+| `sql` | **S**tructured **Q**uery **L**anguage |
+| `db` | **d**ata**b**ase |
+| `env` / `venv` | **env**ironment / **v**irtual **env**ironment |
+| `pip` | the package installer — "**p**ip **i**nstalls **p**ackages" |
+| `regex` | **reg**ular **ex**pression — a pattern language |
+| `utf-8` | **U**nicode **T**ransformation **F**ormat, 8-bit |
+| `bom` | **b**yte **o**rder **m**ark — Excel's invisible CSV prefix |
+| `ean` | **E**uropean **A**rticle **N**umber — the 13-digit barcode |
+| `etl` | **E**xtract, **T**ransform, **L**oad |
+| `eof` | **e**nd **o**f **f**ile — what Ctrl-D sends |
+| `stdin` `stdout` `stderr` | **st**an**d**ard **in**put / **out**put / **err**or |
+| `tmp` | **t**e**mp**orary |
+| `idx` / `i` | **ind**e**x** |
+| `num` / `n` | **num**ber |
+| `char` | **char**acter |
+| `src` / `dst` | **s**our**c**e / **d**e**st**ination |
+| `fn` / `func` | **fun**ction |
+| `obj` | **obj**ect |
+| `param` | **param**eter |
+| `attr` | **attr**ibute |
+| `iter` | **iter**ate / **iter**ator |
+| `lib` | **lib**rary |
+| `impl` | **impl**ementation |
+| `init` | **init**ialise |
+| `config` / `cfg` | **config**uration |
+| `dict` | **dict**ionary |
+| `str` | **str**ing |
+| `len` | **len**gth |
+| `msg` | **mes**sa**g**e |
+| `val` | **val**ue |
+| `res` | **res**ult |
+| `err` / `exc` | **err**or / **exc**eption |
+| `repr` | **repr**esentation |
+| `del` | **del**ete |
+| `elif` | **el**se **if** |
+| `def` | **def**ine |
+| `lambda` | the Greek letter λ — a nameless function |
+| `nan` | **n**ot **a** **n**umber |
+| `inf` | **inf**inity |
+| `mod` | **mod**ulo, or **mod**ule — context decides |
+
+### Why so short?
+
+Most of the maths names come from **C's standard library** from the 1970s, when short
+identifiers were the norm. Python kept them so that anyone arriving from C, Excel or
+MATLAB finds the same words: `sqrt`, `fabs`, `fmod`, `hypot` and `atan2` are all
+unchanged C names, fifty years on.
+
+That is also why `math.fabs` **and** the built-in `abs` both exist: `fabs` is the C one
+and always returns a float; `abs` is Python's own and keeps the type.
+
+```python
+math.fabs(-5)   # 5.0   always a float
+abs(-5)         # 5     stayed an int
+```
+
+> **Modern Python does not abbreviate.** New names are spelled out —
+> `removeprefix`, `is_integer`, `total_ordering`. Write full words in your own code;
+> read the short ones in everyone else's.
+
 ## Strings
 
 ```python

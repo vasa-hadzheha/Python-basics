@@ -21,9 +21,9 @@
 | [2.11](#exercise-211--rows-by-even-positive-sum) | Rows by even-positive sum | sorting rows by a computed key | Lab 7.6 |
 | [2.12](#exercise-212--left-rectangle-integral) | Left-rectangle integral | functions as building blocks | Lab 8.2 |
 | [2.13](#exercise-213--the-cooks-directory) | The cook's directory | dicts, search | Lab 9.2 |
-| [2.14](#exercise-214--column-statistics-) | Column statistics 💼 | list of dicts, aggregation |
-| [2.15](#exercise-215--find-the-duplicates-) | Find the duplicates 💼 | counting pattern |
-| [2.16](#exercise-216--reconcile-two-price-lists-) | Reconcile two price lists 💼 | the real job |
+| [2.14](#exercise-214--column-statistics-) | Column statistics 💼 | list of dicts, aggregation | — |
+| [2.15](#exercise-215--find-the-duplicates-) | Find the duplicates 💼 | counting pattern | — |
+| [2.16](#exercise-216--reconcile-two-price-lists-) | Reconcile two price lists 💼 | the real job | — |
 
 💼 = from our world, not a textbook.
 

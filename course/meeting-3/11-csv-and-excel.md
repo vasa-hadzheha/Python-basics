@@ -296,7 +296,7 @@ Tuesday, when the Austrian supplier's export arrives with comma decimals.
 | UK / US | `,` | `.` |
 | Germany, Austria, much of Europe | `;` | `,` |
 | Tab-separated exports (`.tsv`) | `\t` | either |
-| SAP and similar | `|` | either |
+| SAP and similar | `\|` | either |
 
 Python can guess:
 

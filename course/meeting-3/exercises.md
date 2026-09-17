@@ -19,14 +19,14 @@ Reference solutions: [`exercise-bank/meeting-3/`](../../exercise-bank/meeting-3/
 | [3.2](#exercise-32--replace-zeros-and-write-out) | Replace zeros, write out | writing readable output | Lab 11.2 |
 | [3.3](#exercise-33--search-a-catalogue) | Search a catalogue | collect-then-report | Lab 11.3 |
 | [3.4](#exercise-34--pair-up-coordinates) | Pair up coordinates | line-indexed parsing | Checker |
-| [3.5](#exercise-35--sales-summary-from-csv-) | Sales summary from CSV 💼 | `DictReader`, typing, grouping |
-| [3.6](#exercise-36--validate-a-product-file-) | Validate a product file 💼 | rejects with reasons |
-| [3.7](#exercise-37--csv--sqlite-) | CSV → SQLite 💼 | schema, constraints, `executemany` |
-| [3.8](#exercise-38--answer-five-questions-in-sql-) | Five questions in SQL 💼 | `GROUP BY`, `HAVING`, `JOIN` |
-| [3.9](#exercise-39--monthly-report-file-) | Monthly report file 💼 | formatted output |
-| [3.10](#exercise-310--incremental-load-) | Incremental load 💼 | upsert, idempotency |
-| [3.11](#exercise-311--code-review-the-quick-script-) | **Code review: the quick script** 🔍 | reading for bugs |
-| [3.12](#exercise-312--code-review-ai-generated-loader-) | **Code review: AI-generated loader** 🔍 | reviewing generated code |
+| [3.5](#exercise-35--sales-summary-from-csv-) | Sales summary from CSV 💼 | `DictReader`, typing, grouping | — |
+| [3.6](#exercise-36--validate-a-product-file-) | Validate a product file 💼 | rejects with reasons | — |
+| [3.7](#exercise-37--csv--sqlite-) | CSV → SQLite 💼 | schema, constraints, `executemany` | — |
+| [3.8](#exercise-38--answer-five-questions-in-sql-) | Five questions in SQL 💼 | `GROUP BY`, `HAVING`, `JOIN` | — |
+| [3.9](#exercise-39--monthly-report-file-) | Monthly report file 💼 | formatted output | — |
+| [3.10](#exercise-310--incremental-load-) | Incremental load 💼 | upsert, idempotency | — |
+| [3.11](#exercise-311--code-review-the-quick-script-) | **Code review: the quick script** 🔍 | reading for bugs | — |
+| [3.12](#exercise-312--code-review-ai-generated-loader-) | **Code review: AI-generated loader** 🔍 | reviewing generated code | — |
 
 ---
 

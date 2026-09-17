@@ -53,7 +53,8 @@ flowchart LR
 
 1. **[SETUP.md](SETUP.md)** — install Python, create a virtual environment, run your first file. *(15 minutes, do this before Meeting 1.)*
 2. **[Meeting 1](course/meeting-1/README.md)** — begin the course.
-3. **[CHEATSHEET.md](course/CHEATSHEET.md)** — one page, print it, keep it next to you.
+3. **[CHEATSHEET.md](course/CHEATSHEET.md)** — syntax reference: operators and their
+   English names, what every symbol is called, and what the abbreviated names stand for.
 4. **[GLOSSARY.md](course/GLOSSARY.md)** — every term explained in one sentence, no jargon.
 
 **Presenting this to colleagues?** Start with
@@ -68,7 +69,7 @@ what to cut when you run out of time, and the questions you will be asked.
 .
 ├── SETUP.md                  Install Python and run your first script
 ├── course/
-│   ├── CHEATSHEET.md         One-page syntax reference
+│   ├── CHEATSHEET.md         Syntax, symbol names, abbreviations decoded
 │   ├── GLOSSARY.md           Plain-language dictionary of terms
 │   ├── HOW-TO-TEACH.md       Presenter notes: timings, live-coding script, common questions
 │   ├── APPENDIX-classes.md   Classes — optional, an eventual Meeting 4

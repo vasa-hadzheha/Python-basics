@@ -8,6 +8,7 @@ so they work in CI.
 ```bash
 bash tools/run-all-scripts.sh      # runs all 77 scripts, feeding stdin where needed
 python3 tools/check-links.py       # checks every relative markdown link and #anchor
+python3 tools/check-tables.py      # checks every markdown table's column count
 ```
 
 Run both from the **repository root**.
@@ -51,3 +52,19 @@ all relative links and anchors resolve
 
 External `http(s)://` links are skipped — checking those needs the network and would
 make the script flaky.
+
+## `check-tables.py`
+
+Counts the unescaped `|` characters in every row of every markdown table and reports any
+table whose rows disagree. Two mistakes it catches, both of which render as a broken or
+phantom column on GitHub while looking fine in a plain editor:
+
+- a row missing its final cell, e.g. three cells under a four-column header
+- a raw `|` inside a cell — even inside backticks. Write it as `\|`
+
+Expected output:
+
+```
+checked 103 tables
+every table has a consistent number of columns
+```
