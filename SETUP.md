@@ -150,6 +150,96 @@ $ python3
 
 ---
 
+## Loops in the shell — press Enter **twice**
+
+Everything above was one line at a time. A loop is several lines, and the shell handles
+those differently in a way that stops everyone at least once.
+
+```bash
+>>> items = [2, 6, 9, 34, 787, 33]
+>>> for item in items:
+...     print(item)
+...                      ← press Enter here, on the EMPTY line
+2
+6
+9
+34
+787
+33
+>>>
+```
+
+Two rules, and they are the whole of it:
+
+### 1. The `:` is not optional
+
+```python
+for item in items        # SyntaxError: expected ':'
+for item in items:       # correct
+```
+
+Miss the colon and you get this the moment you press Enter:
+
+```
+  File "<stdin>", line 1
+    for item in items
+                     ^
+SyntaxError: expected ':'
+```
+
+Python is telling you exactly what it wants. Same for `if`, `while`, `def` and `class` —
+every one of them ends its opening line with a colon.
+
+### 2. `...` means "still listening", not "running"
+
+When the prompt changes from `>>>` to `...`, the shell is **collecting** your block, not
+executing it. Type `print(item)`, press Enter, and you get another `...` — nothing runs.
+
+**To run the block, press Enter on an empty `...` line.** That blank line is how you say
+"the block is finished".
+
+```mermaid
+flowchart TD
+    A[">>> for item in items:"] --> B["... &nbsp;&nbsp;&nbsp;&nbsp;print(item)"]
+    B --> C{"prompt is now<br/><b>...</b>"}
+    C -->|"press Enter once"| D["... &nbsp;<i>(empty line)</i>"]
+    D -->|"Enter runs the block"| E["2<br/>6<br/>9<br/>..."]
+    C -->|"keep typing"| B
+```
+
+So the full keystroke sequence is: `print(item)` → **Enter** → **Enter**.
+
+### About the indentation
+
+The body of the loop must be indented. Depending on your Python version:
+
+| Version | After `...` |
+|---------|-------------|
+| 3.12 and earlier | you type the 4 spaces yourself |
+| 3.13 and newer | it indents for you, and colours your code as you type |
+
+Either way, no indent means
+`IndentationError: expected an indented block after 'for' statement on line 1`.
+
+### When to stop using the shell
+
+**Past about three lines, put it in a file.** You cannot go back and edit a line you have
+already submitted, so one typo means retyping the whole block. Create `loop.py`:
+
+```python
+items = [2, 6, 9, 34, 787, 33]
+for item in items:
+    print(item)
+```
+
+and run it with `python3 loop.py`. Now you can fix a typo and re-run in two seconds.
+
+> **The division of labour:** the shell is for *questions* — `list(range(5))`,
+> `type("5")`, `7 // 2`, "what does `.strip()` do again?". Files are for *work* —
+> anything longer than a few lines, and anything you want to keep.
+
+---
+
 ## When something goes wrong
 
 Python error messages are not noise — they are a report, and they are read **bottom-up**:

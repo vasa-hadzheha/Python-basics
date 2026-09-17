@@ -18,18 +18,126 @@ int("42")  float("3.14")  str(42)
 int(3.99)  # 3  ← CHOPS. round(3.99) → 4
 ```
 
-## Arithmetic
+## Arithmetic — with the English name of each operation
+
+| Write | Name of the operation | Say it aloud | `7` and `2` give | The result is called |
+|-------|----------------------|--------------|------------------|----------------------|
+| `a + b` | **addition** | "seven plus two" | `9` | the **sum** |
+| `a - b` | **subtraction** | "seven minus two" | `5` | the **difference** |
+| `a * b` | **multiplication** | "seven times two" | `14` | the **product** |
+| `a / b` | **division** (true division) | "seven divided by two" | `3.5` | the **quotient** |
+| `a // b` | **floor division** (integer division) | "seven floor-divided by two" | `3` | the **quotient**, remainder thrown away |
+| `a % b` | **modulo** (modulus) | "seven modulo two", "seven mod two" | `1` | the **remainder** |
+| `a ** b` | **exponentiation** | "seven to the power of two" | `49` | the **power** |
+| `-a` | **negation** | "minus seven", "negative seven" | `-7` | |
+| `abs(a)` | **absolute value** | "the absolute value of minus five" | `5` | |
+
+### `/` vs `//` vs `%` — one sentence covers all three
+
+Remember school division: **"7 divided by 2 is 3, remainder 1."**
+
+```
+        7 / 2   =  3.5        ← the exact answer, as a decimal
+        7 // 2  =  3          ← the "3"         (how many whole times)
+        7 % 2   =  1          ← the "remainder 1"
+```
+
+So `//` and `%` are the two halves of one school division, and `/` is the exact answer.
+They fit back together:
 
 ```python
-7 + 2   9        7 / 2   3.5   ← always a float
-7 - 2   5        7 // 2  3     ← floor, remainder discarded
+(7 // 2) * 2 + (7 % 2)  ==  7        # always true
+```
+
+```python
+7 + 2   9        7 / 2   3.5   ← always a float, even 4 / 2 → 2.0
+7 - 2   5        7 // 2  3     ← floor: remainder discarded
 7 * 2   14       7 % 2   1     ← remainder only
 2 ** 8  256      abs(-5) 5
 
-x % 2 == 0       # is x even?
-n % 10           # last digit      n // 10  # drop last digit
+x % 2 == 0       # is x even?   (remainder of 0 when divided by 2)
+n % 10           # last digit      n // 10  # drop the last digit
 x += 1  x -= 1  x *= 2  total += price
 ```
+
+---
+
+## Symbol names in English
+
+What to call each character when you search for help, read code aloud, or ask a
+colleague. Where British and American English differ, both are given.
+
+### Brackets — three kinds, three jobs
+
+| Symbol | English name | What it does in Python |
+|--------|--------------|------------------------|
+| `( )` | **parentheses** (one is a *parenthesis*) · UK also **round brackets** | calling a function `print(x)`; grouping `(a + b) * 2`; a tuple `(1, 2)` |
+| `[ ]` | **square brackets** · US often just **brackets** | a list `[1, 2]`; indexing `items[0]`; slicing `items[1:3]` |
+| `{ }` | **curly braces** · also **braces**, **curly brackets** | a dict `{"a": 1}`; a set `{1, 2}`; a placeholder in an f-string `f"{name}"` |
+| `< >` | **angle brackets** · as operators, **less than** / **greater than** | comparison `a < b`. Not used for grouping in Python |
+
+> Say **"open"** and **"close"** for the two halves: `(` is an opening parenthesis,
+> `)` a closing parenthesis.
+
+### Operator and punctuation symbols
+
+| Symbol | English name | In Python |
+|--------|--------------|-----------|
+| `+` | **plus** (plus sign) | add; join strings and lists |
+| `-` | **minus** · as punctuation, **hyphen** or **dash** | subtract; negate |
+| `*` | **asterisk** · spoken **"star"** | multiply; `*args`; unpack `zip(*rows)`; `"-" * 40` |
+| `/` | **(forward) slash** | divide; separates folders in a path |
+| `\` | **backslash** | escape character: `\n` newline, `\t` tab, `\\` a literal backslash |
+| `%` | **percent** (percent sign) | modulo; old-style formatting `"%s" % x` |
+| `=` | **equals sign** | assignment — read it as "gets", not "equals" |
+| `==` | **double equals** · "is equal to" | comparison |
+| `!=` | **not equal to** · "bang equals" | comparison |
+| `!` | **exclamation mark** (UK) · **exclamation point** (US) · spoken **"bang"** | only in `!=` and `{x!r}` — Python has no standalone `!` |
+| `&` | **ampersand** | bitwise AND; set and dict-key intersection `a.keys() & b.keys()` |
+| `\|` | **pipe** · **vertical bar** | bitwise OR; set union; type union `int \| None` |
+| `^` | **caret** · also **hat**, **circumflex** | bitwise XOR. ⚠️ **not** a power — use `**` |
+| `~` | **tilde** | bitwise NOT; in pandas and Polars, "not" |
+| `@` | **at sign** · spoken **"at"** | decorator `@property`; matrix multiplication |
+| `:` | **colon** | ends `if` / `for` / `while` / `def` / `class`; slices; dict `key: value` |
+| `;` | **semicolon** | separates two statements on one line. Rare — avoid it |
+| `,` | **comma** | separates items and arguments |
+| `.` | **dot** · UK **full stop** · US **period** | attribute or method access `text.strip()`; decimal point |
+| `_` | **underscore** | word separator in `snake_case`; "I do not need this value" |
+| `#` | **hash** (UK) · **pound sign**, **number sign**, **octothorpe** (US) | starts a comment |
+| `?` | **question mark** | not used in Python. It is the parameter placeholder in SQL |
+| `$` | **dollar sign** | not used in Python. Common in shells and regular expressions |
+
+### Quotes
+
+| Symbol | English name | In Python |
+|--------|--------------|-----------|
+| `'` | **single quote** · **apostrophe** | a string: `'text'` |
+| `"` | **double quote** | a string: `"text"` — identical in meaning to single |
+| `'''` or 3 × `"` | **triple quote** | a multi-line string; a docstring |
+| `` ` `` | **backtick** · **grave accent** | not used in Python. Markdown and shells use it |
+
+### Multi-character operators — how to say them
+
+| Symbol | Say it | Means |
+|--------|--------|-------|
+| `**` | "double star" / "to the power of" | exponent; `**kwargs` |
+| `//` | "double slash" / "floor division" | integer division |
+| `==` | "double equals" | is equal to |
+| `!=` | "not equals" / "bang equals" | is not equal to |
+| `<=` `>=` | "less than or equal to" | comparison |
+| `+=` | "plus equals" | `x += 1` is short for `x = x + 1` |
+| `->` | "arrow" | return type: `def f() -> int:` |
+| `:=` | the **walrus** operator | assign inside an expression |
+| `__init__` | "**dunder** init" | *d*ouble *under*score — a special method |
+| `...` | "ellipsis" · in the shell, the **continuation prompt** | the `Ellipsis` object; also a `pass` placeholder |
+
+### The three that catch people out
+
+| | |
+|---|---|
+| `^` is **not** a power | `2 ^ 8` is `10`, not `256`. Use `2 ** 8` |
+| `=` is **not** equality | `=` assigns, `==` compares |
+| `\` is **not** division | `\` escapes, `/` divides |
 
 ## Strings
 
