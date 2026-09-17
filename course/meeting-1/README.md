@@ -42,6 +42,15 @@ made of these four things nested inside each other. That is genuinely all there 
 
 ---
 
+## Presenting this?
+
+➡ **[RUNSHEET.md](RUNSHEET.md)** — one printable page: every keystroke, every output,
+every deliberate mistake, the trace table ready to copy onto a whiteboard, and what to
+cut when you run out of time. Read [HOW-TO-TEACH.md](../HOW-TO-TEACH.md) once for the
+overall approach, then present from the runsheet.
+
+---
+
 ## Before you start
 
 - Finished [SETUP.md](../../SETUP.md)? You need `python3 --version` to work.

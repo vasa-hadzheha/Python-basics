@@ -40,6 +40,10 @@ keep going.
 
 ## Meeting 1 — Foundations (2.5 h)
 
+> ➡ **There is a keystroke-by-keystroke runsheet for this meeting:
+> [meeting-1/RUNSHEET.md](meeting-1/RUNSHEET.md).** Print that and present from it.
+> The table below is the overview; the runsheet is what you hold in your hand.
+
 | Time | What | Notes |
 |------|------|-------|
 | 0:00 | Welcome + the "why" | 5 min. Use the framing from the [README](../README.md): AI writes it, you must judge it |

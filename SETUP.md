@@ -50,7 +50,31 @@ git clone https://github.com/vasa-hadzheha/Python-basics.git
 cd Python-basics
 ```
 
-No Git? Use the green **Code → Download ZIP** button on GitHub and unzip it.
+> **⚠️ If you do not see a `course/` folder, you are on the wrong branch.**
+> `git clone` gives you the repository's **default branch**. If the course has not been
+> merged into it yet, ask for it by name:
+>
+> ```bash
+> git clone -b claude/confident-fermi-euzrrg https://github.com/vasa-hadzheha/Python-basics.git
+> cd Python-basics
+> ```
+>
+> Already cloned? Switch without re-downloading:
+>
+> ```bash
+> git fetch origin
+> git checkout claude/confident-fermi-euzrrg
+> ```
+>
+> Check you are in the right place — this must print `passed: 80`:
+>
+> ```bash
+> bash tools/run-all-scripts.sh
+> ```
+
+No Git? Use the green **Code → Download ZIP** button on GitHub — but **switch the branch
+first** using the dropdown at the top left of the file list, or the ZIP will contain the
+old files.
 
 ---
 

@@ -1,6 +1,6 @@
 # Meeting 1 — Exercises
 
-⬅ [Meeting 1](README.md) · [Course home](../../README.md)
+⬅ [Meeting 1](README.md) · [Course home](../../README.md) · [Presenter runsheet](RUNSHEET.md)
 
 **15 tasks.** Most come from the original lab archive, translated; the last few are
 work-flavoured. They are ordered easy → hard.

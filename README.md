@@ -57,9 +57,13 @@ flowchart LR
    English names, what every symbol is called, and what the abbreviated names stand for.
 4. **[GLOSSARY.md](course/GLOSSARY.md)** — every term explained in one sentence, no jargon.
 
-**Presenting this to colleagues?** Start with
-**[HOW-TO-TEACH.md](course/HOW-TO-TEACH.md)** — per-lesson timings, what to live-code,
-what to cut when you run out of time, and the questions you will be asked.
+**Presenting this to colleagues?** Two documents:
+
+- **[HOW-TO-TEACH.md](course/HOW-TO-TEACH.md)** — the approach: per-lesson timings, what
+  to live-code, what to cut when you run out of time, and the questions you will be asked.
+- **[meeting-1/RUNSHEET.md](course/meeting-1/RUNSHEET.md)** — a printable page for
+  Meeting 1 with every keystroke, every output, and the trace table ready for the
+  whiteboard. Present from this one.
 
 ---
 
