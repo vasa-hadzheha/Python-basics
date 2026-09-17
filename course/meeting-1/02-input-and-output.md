@@ -120,32 +120,167 @@ print(f"{value:10.2f}")     #    1234.57   width 10, right-aligned
 print(f"{value:,.2f}")      # 1,234.57     thousands separator
 ```
 
-Width control is how you produce a readable table in a terminal — we build a full one in
-[Lesson 7](../meeting-2/07-nested-lists-and-matrices.md):
+### The grammar
+
+```
+{value : [fill][align] [sign] [width] [,] [.precision] [type]}
+            *     < > ^    +     20     ,      .10        f
+```
+
+Everything after the colon is optional, which is why `:.2f`, `:<12`, `:>8.2f` and
+`:,.0f` all work. Read `:20.10f` as *"at least 20 characters wide, 10 digits after the
+point, fixed-point"*.
+
+### ⚠️ Width is a *minimum* — this is the one that confuses everyone
+
+`3.1415926536` already needs **12 characters**, so any width below 12 does nothing at all:
 
 ```python
-print(f"{'Product':<12}{'Qty':>5}{'Price':>10}")
-print(f"{'Bread':<12}{6:>5}{13.5:>10.2f}")
+value = 3.14159265358979
+
+f"{value:.10f}"      # '3.1415926536'                    12 characters
+f"{value:5.10f}"     # '3.1415926536'                    width 5  → IGNORED
+f"{value:12.10f}"    # '3.1415926536'                    width 12 → exact fit
+f"{value:20.10f}"    # '        3.1415926536'            width 20 → 8 spaces added
+f"{value:30.10f}"    # '                  3.1415926536'  width 30 → 18 spaces
+```
+
+**Width never truncates a number — it only pads.** If you experiment with a small width
+and see no change, that is why.
+
+And there is a second reason it seems to do nothing: **the padding is spaces, and
+`print()` shows them against the background.** In the shell, leave `print()` off and
+the quotes reveal it:
+
+```python
+>>> f"{value:20.10f}"           # the quotes show you exactly where the padding is
+'        3.1415926536'
+>>> print(f"{value:20.10f}")    # same string, but now the padding is invisible
+        3.1415926536
+```
+
+### What width is *for*: columns
+
+A single value looks pointless. Stack them and the purpose appears:
+
+| `:.2f` — no width | `:10.2f` — width 10 |
+|---|---|
+| <pre>7.50<br>1234.50<br>89.12<br>0.75<br>45678.90</pre> | <pre>      7.50<br>   1234.50<br>     89.12<br>      0.75<br>  45678.90</pre> |
+
+**The decimal points line up.** That is the entire point, and it only shows up across
+several lines — which is why testing one number tells you nothing.
+
+### Alignment inside the width
+
+```python
+value = 3.5
+```
+
+| Code | Result | Meaning |
+|------|--------|---------|
+| `:10.2f` | `'      3.50'` | numbers default to **right** |
+| `:>10.2f` | `'      3.50'` | right, said explicitly |
+| `:<10.2f` | `'3.50      '` | left |
+| `:^10.2f` | `'   3.50   '` | centre |
+| `:010.2f` | `'0000003.50'` | zero-filled |
+| `:+10.2f` | `'     +3.50'` | always show the sign |
+| `:*>10.2f` | `'******3.50'` | any fill character |
+| `:10` on `"abc"` | `'abc       '` | **text defaults to LEFT** |
+
+That asymmetry is deliberate: text reads better left-aligned, numbers compare better
+right-aligned. It is why the table below uses `:<20` for names and `:>10.2f` for money.
+
+### Putting it together — a report
+
+```python
+rows = [
+    ("Bread 500g", "pcs", 6, 1.35),
+    ("Sparkling water 1L", "bottle", 48, 0.65),
+    ("Coffee 500g", "pack", 3, 7.99),
+]
+
+print(f"{'Product':<20}{'Unit':<8}{'Qty':>5}{'Price':>10}{'Total':>12}")
+print("-" * 55)
+for name, unit, quantity, price in rows:
+    print(f"{name:<20}{unit:<8}{quantity:>5}{price:>10.2f}{quantity * price:>12.2f}")
 ```
 
 ```
-Product       Qty     Price
-Bread           6     13.50
+Product             Unit      Qty     Price       Total
+-------------------------------------------------------
+Bread 500g          pcs         6      1.35        8.10
+Sparkling water 1L  bottle     48      0.65       31.20
+Coffee 500g         pack        3      7.99       23.97
 ```
 
-| Code | Meaning |
-|------|---------|
-| `:<12` | left-align in 12 characters |
-| `:>5` | right-align in 5 characters |
-| `:^9` | centre in 9 characters |
-| `:>10.2f` | right-align in 10, 2 decimals — **numbers always right-align** |
+Every column is a width. Remove them and it is unreadable. We build a full one in
+[Lesson 7](../meeting-2/07-nested-lists-and-matrices.md) and use it for real in
+[Lesson 13](../meeting-3/13-mini-etl-project.md).
 
-> **⚠️ The number before the dot is width; after the dot is decimals.**
-> `f"{0.1:20f}"` asks for 20 *characters* and gives you the default 6 decimals —
-> `'            0.100000'`. To see 20 decimals you need the dot: `f"{0.1:.20f}"`.
-> This trips people up the moment they try to inspect a float, and it is why the
-> rounding error in [Lesson 1's float box](01-values-and-types.md#the-float-box--read-this-once-remember-it-forever)
-> stays invisible.
+### Long text breaks a table — unless you cap it
+
+```python
+name = "Sparkling mineral water 1 litre glass bottle"    # 44 characters
+
+f"{name:<20}"        # the whole 44 characters — the column is ruined
+f"{name:<20.20}"     # 'Sparkling mineral wa' — capped at 20
+```
+
+**For text, precision is a maximum length**, not a number of decimals. `:<20.20` means
+*"at least 20 wide, at most 20 characters"*, which is how you stop one long product name
+destroying an entire report.
+
+### Width from a variable
+
+```python
+names = ["Bread", "Sparkling water 1L", "Coffee"]
+needed = max(len(n) for n in names)        # 18
+
+for name in names:
+    print(f"|{name:<{needed}}|")           # nested braces: the width is computed
+```
+
+```
+|Bread             |
+|Sparkling water 1L|
+|Coffee            |
+```
+
+Handy when the column width depends on your data rather than a guess.
+
+### The other type letters
+
+| Code | `1234.5678` becomes | Use for |
+|------|--------------------|---------|
+| `:.2f` | `1234.57` | **money, almost always** |
+| `:,.2f` | `1,234.57` | large amounts |
+| `:.2e` | `1.23e+03` | very large or very small numbers |
+| `:.4g` | `1235` | shortest sensible form |
+| `:.1%` | `123456.8%` | percentages — ⚠️ it **multiplies by 100** |
+
+For integers: `:,d` → `1,234,567`, `:b` → binary, `:08b` → zero-padded binary,
+`:x` → hex, `:#x` → `0xff`.
+
+### ⚠️ A rounding gotcha
+
+```python
+f"{0.125:.2f}"     # '0.12'   ← down
+f"{0.135:.2f}"     # '0.14'   ← up
+f"{2.675:.2f}"     # '2.67'   ← down
+```
+
+Python rounds **half to even**, and float storage nudges some values either way
+([Lesson 1's float box](01-values-and-types.md#the-float-box--read-this-once-remember-it-forever)).
+Fine for display. **Not** fine when a total must match an invoice — for that, `Decimal`
+with an explicit mode:
+
+```python
+from decimal import Decimal, ROUND_HALF_UP
+
+Decimal("0.125").quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)    # 0.13
+```
+
+▶ Run all of this, and experiment: `python3 examples/meeting-1/02_formatting.py`
 
 ---
 

@@ -386,6 +386,94 @@ len(s)   "b" in s   s.startswith("a")
 "-" * 40                      # a separator line
 ```
 
+---
+
+## Formatting: width, precision, alignment
+
+```
+{value : [fill][align] [sign] [width] [,] [.precision] [type]}
+            *     < > ^    +     20     ,      .10        f
+```
+
+Read `:20.10f` as *"at least 20 wide, 10 decimals, fixed-point"*. All parts optional.
+
+### The two rules that trip everyone
+
+| | |
+|---|---|
+| **Before the dot = WIDTH. After = PRECISION.** | `:20f` is width 20 with the default 6 decimals — **not** 20 decimals. Use `:.20f` |
+| **Width is a MINIMUM.** | Content always wins; width only pads, never truncates. A width smaller than the value does nothing |
+
+```python
+v = 3.14159265358979          # "3.1415926536" is 12 characters
+f"{v:5.10f}"    # '3.1415926536'            width 5  → ignored
+f"{v:20.10f}"   # '        3.1415926536'    width 20 → 8 spaces
+```
+
+**Padding is spaces, so `print()` hides it.** In the shell, drop `print()` — the quotes
+show you the padding.
+
+### Alignment
+
+| Spec | `3.5` becomes | |
+|------|--------------|---|
+| `:10.2f` | `'      3.50'` | numbers default **right** |
+| `:<10.2f` | `'3.50      '` | left |
+| `:^10.2f` | `'   3.50   '` | centre |
+| `:010.2f` | `'0000003.50'` | zero-filled |
+| `:+10.2f` | `'     +3.50'` | always signed |
+| `:*>10.2f` | `'******3.50'` | custom fill |
+| `:10` on `"abc"` | `'abc       '` | **text defaults left** |
+
+### Types
+
+| Spec | `1234.5678` | |
+|------|-------------|---|
+| `:.2f` | `1234.57` | money — use this |
+| `:,.2f` | `1,234.57` | thousands separator |
+| `:.2e` | `1.23e+03` | scientific |
+| `:.4g` | `1235` | shortest sensible |
+| `:.1%` | `123456.8%` | ⚠️ multiplies by 100 |
+
+Integers: `:,d` → `1,234,567` · `:b` binary · `:08b` padded binary · `:x` hex · `:#x` → `0xff`
+
+### Text: precision is a MAXIMUM LENGTH
+
+```python
+name = "Sparkling mineral water 1 litre bottle"
+f"{name:<20}"      # all 38 chars — column ruined
+f"{name:<20.20}"   # 'Sparkling mineral wa' — capped
+```
+
+### Width from a variable
+
+```python
+w = max(len(n) for n in names)
+f"{name:<{w}}"                 # nested braces
+```
+
+### The column recipe — keep this
+
+```python
+print(f"{'Product':<20}{'Unit':<8}{'Qty':>5}{'Price':>10}{'Total':>12}")
+print("-" * 55)
+for name, unit, qty, price in rows:
+    print(f"{name:<20}{unit:<8}{qty:>5}{price:>10.2f}{qty*price:>12.2f}")
+```
+Text left (`:<`), numbers right (`:>`), money `.2f`. Every column is a width.
+
+### ⚠️ Rounding
+
+```python
+f"{0.125:.2f}"   # '0.12'  down     f"{0.135:.2f}"   # '0.14'  up
+```
+Half-to-even, plus float storage. For invoices:
+```python
+Decimal("0.125").quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)   # 0.13
+```
+
+▶ `python3 examples/meeting-1/02_formatting.py`
+
 ## Conditions
 
 ```python

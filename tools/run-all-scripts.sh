@@ -26,6 +26,7 @@ NUM3="3
 # ---- examples ----
 run examples/meeting-1/01_types.py ""
 run examples/meeting-1/01_float_precision.py ""
+run examples/meeting-1/02_formatting.py ""
 run examples/meeting-1/01_triangle_area.py ""
 run examples/meeting-1/02_piecewise.py "2
 5
