@@ -56,6 +56,17 @@ keep going.
 trace table on the whiteboard for `n = 1020` — that single exercise does more for
 their loop model than anything else in the meeting.
 
+**Two ready-made demos, so you are not typing under pressure:**
+
+```bash
+python3 examples/meeting-1/04_infinite_loops.py 1 slow   # runaway loop -> Ctrl-C -> shows the fix
+python3 examples/meeting-1/01_float_precision.py         # why 0.1 + 0.2 != 0.3, start to finish
+```
+
+Run the infinite-loop one at L4 and say the Ctrl-C line out loud — *"every programmer
+does this several times a week; it is the fire extinguisher, not a failure."* That
+sentence does more for their confidence than anything else you will say.
+
 **Skip if short of time:** L5's recurrence example (worked example 2). Lessons 1–4 are
 the load-bearing ones.
 

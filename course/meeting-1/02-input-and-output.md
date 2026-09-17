@@ -140,6 +140,13 @@ Bread           6     13.50
 | `:^9` | centre in 9 characters |
 | `:>10.2f` | right-align in 10, 2 decimals — **numbers always right-align** |
 
+> **⚠️ The number before the dot is width; after the dot is decimals.**
+> `f"{0.1:20f}"` asks for 20 *characters* and gives you the default 6 decimals —
+> `'            0.100000'`. To see 20 decimals you need the dot: `f"{0.1:.20f}"`.
+> This trips people up the moment they try to inspect a float, and it is why the
+> rounding error in [Lesson 1's float box](01-values-and-types.md#the-float-box--read-this-once-remember-it-forever)
+> stays invisible.
+
 ---
 
 ## Worked example — a piecewise function

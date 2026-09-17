@@ -25,6 +25,7 @@ NUM3="3
 "
 # ---- examples ----
 run examples/meeting-1/01_types.py ""
+run examples/meeting-1/01_float_precision.py ""
 run examples/meeting-1/01_triangle_area.py ""
 run examples/meeting-1/02_piecewise.py "2
 5
@@ -33,6 +34,11 @@ run examples/meeting-1/03_triangle_validated.py "$NUM3"
 run examples/meeting-1/03_right_triangle.py ""
 run examples/meeting-1/04_count_zeros.py "1020
 "
+# 04_infinite_loops.py runs forever by design - interrupt it and
+# check it still reports the fix.
+printf '' | timeout -s INT 3 python3 examples/meeting-1/04_infinite_loops.py 1 > /tmp/runout 2>&1
+if grep -q "THE FIX" /tmp/runout; then pass=$((pass+1)); echo "ok   examples/meeting-1/04_infinite_loops.py (interrupted, showed the fix)";
+else fail=$((fail+1)); echo "FAIL examples/meeting-1/04_infinite_loops.py"; fi
 run examples/meeting-1/04_series_precision.py "0.5
 0.000001
 "

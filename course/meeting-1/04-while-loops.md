@@ -82,9 +82,38 @@ This prints `1` forever. The condition never becomes False because nothing chang
 > **Press `Ctrl-C` in the terminal to kill a runaway program.** Every programmer does
 > this several times a week. It is not a failure, it is the fire extinguisher.
 
-An infinite loop is almost always one of two mistakes:
-1. You forgot to update the variable in the condition.
-2. You update it in the wrong direction (`i -= 1` when the condition is `i <= 5`).
+An infinite loop is almost always one of five mistakes:
+
+| # | Mistake | Symptom |
+|---|---------|---------|
+| 1 | forgot to update the condition's variable | floods with the **same** value |
+| 2 | update points the wrong way (`+=` where `-=` was meant) | counts away from the condition, forever |
+| 3 | `continue` placed before the update | prints a little, then **silence** — a frozen cursor |
+| 4 | a float compared with `==` / `!=` | steps **over** the target and never returns |
+| 5 | the body changes a different variable than the condition reads | counts up forever |
+
+Number 4 is the one worth dwelling on, because it looks completely reasonable:
+
+```python
+x = 0.0
+while x != 1.0:          # runs forever
+    x += 0.1
+```
+
+After ten additions `x` is `0.9999999999999999`, not `1.0`, so the loop steps straight
+past its target and never comes back. That is
+[Lesson 1's float box](01-values-and-types.md#the-float-box--read-this-once-remember-it-forever)
+turning into a hang. **Never use `==` or `!=` on a float in a loop condition:** count in
+integers, or compare against a tolerance.
+
+▶ **Run all five and Ctrl-C them:**
+
+```bash
+python3 examples/meeting-1/04_infinite_loops.py          # a menu of the five
+python3 examples/meeting-1/04_infinite_loops.py 4 slow   # one of them, slowly
+```
+
+Each one prints its own fix after you interrupt it.
 
 ---
 

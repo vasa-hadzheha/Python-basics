@@ -243,23 +243,106 @@ print(0.1 + 0.2)              # 0.30000000000000004
 print(0.1 + 0.2 == 0.3)       # False
 ```
 
-This is not a Python bug. Computers store decimals in binary, and 0.1 has no exact binary
-form, exactly as 1/3 has no exact decimal form. So there is a tiny error, and comparing
-two floats with `==` is unreliable.
+#### First: why you cannot see the problem
 
-**The professional fix** — and this is what the original Lab 4 archive does, which is
-genuinely good practice — is to compare against a tolerance, conventionally called *epsilon*:
+The natural reaction is *"let me print more digits and look"* — and the natural attempt
+does not work:
+
+```python
+print(f"{0.1:20f}")      #             0.100000   ← looks perfectly clean
+print(f"{0.1:100f}")     # the same 0.100000, just padded further right
+```
+
+**The number before the dot is the WIDTH. The number after it is the PRECISION.**
+`:20f` asks for 20 *characters*, not 20 decimals — and `f` defaults to 6 decimals, which
+rounds the error away before you ever see it.
+
+Add the dot and the truth appears:
+
+```python
+print(f"{0.1:.20f}")     # 0.10000000000000000555
+print(f"{0.1:.55f}")     # 0.1000000000000000055511151231257827021181583404541015625
+```
+
+| Spec | Means |
+|------|-------|
+| `:10f` | width 10, **6 decimals** (the default) |
+| `:.10f` | **10 decimals**, no minimum width |
+| `:20.10f` | width 20 **and** 10 decimals |
+| `:.2f` | 2 decimals — what money needs |
+
+`0.1` was never exactly `0.1`. It only looked that way because the default formatting
+hid the difference.
+
+#### Why it happens
+
+Computers store numbers in base 2 — halves, quarters, eighths. Some decimals fit exactly
+and some never do:
+
+| | |
+|---|---|
+| `1/10` in **decimal** | `0.1` — exact |
+| `1/3` in **decimal** | `0.333…` — never ends |
+| `1/10` in **binary** | `0.00011001100110011…` — never ends |
+
+`0.1` in binary is `0011` repeating forever. A float has room for 53 binary digits, so
+the pattern gets **cut off**, and the stored value is very slightly wrong. It is exactly
+why you cannot write `1/3` exactly on paper.
+
+So the two sums really are different numbers:
+
+```
+0.1 + 0.2 produces  0.3000000000000000444089209850062616169452667236328125
+0.3       is        0.2999999999999999888977697537484345957636833190917968750
+```
+
+They are *adjacent* floats — one step apart, nothing in between:
+
+```python
+(0.1 + 0.2).hex()    # '0x1.3333333333334p-2'
+(0.3).hex()          # '0x1.3333333333333p-2'   ← 3 instead of 4, one digit
+```
+
+Some decimals **are** exact, though — the powers of two: `0.5`, `0.25`, `0.125`, `0.75`.
+
+#### What to do about it
+
+**1. Never compare floats with `==`.** Compare against a tolerance — conventionally
+called *epsilon*. This is what the original Lab 4 archive does, and it is genuinely good
+practice:
 
 ```python
 import math
 
 eps = 0.000001                                   # "close enough" threshold
 print(math.fabs((0.1 + 0.2) - 0.3) < eps)        # True
+print(math.isclose(0.1 + 0.2, 0.3))              # True — built in, does the same job
 ```
 
 Read it as: *"is the distance between the two values smaller than my tolerance?"*
-You will meet this pattern again in [Lesson 3](03-conditions.md) when we check
-whether a triangle has a right angle.
+You will meet this pattern again in [Lesson 3](03-conditions.md) when we check whether a
+triangle has a right angle, and in [Lesson 13](../meeting-3/13-mini-etl-project.md) when
+a pipeline checks its own arithmetic.
+
+**2. For display, pin the decimals:** `f"{value:.2f}"`. Always, for money.
+
+**3. For money that must be exact to the cent, use `Decimal`:**
+
+```python
+from decimal import Decimal
+
+Decimal("0.1") + Decimal("0.2") == Decimal("0.3")     # True
+```
+
+⚠️ Note the **quotes**. `Decimal("0.1")` is exact; `Decimal(0.1)` is handed the already-broken
+float and keeps the error.
+
+**4. Or store money as whole cents in an `int`**, and divide only when printing. Banks do this.
+
+> **This is not a Python bug.** Every language using IEEE 754 doubles behaves identically —
+> C, Java, JavaScript, Excel, SQL. It is how the hardware works.
+
+▶ See all of it run: `python3 examples/meeting-1/01_float_precision.py`
 
 ---
 

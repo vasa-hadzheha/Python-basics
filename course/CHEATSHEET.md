@@ -367,6 +367,9 @@ abs(-5)         # 5     stayed an int
 ```python
 f"{name} is {age}"            # f-string — use this
 f"{value:.2f}"                # 2 decimals (money)
+#  :10f  = width 10, 6 decimals (default)   <- NOT 10 decimals!
+#  :.10f = 10 decimals                      <- the DOT means precision
+f"{0.1:.20f}"                 # 0.10000000000000000555  <- the float error, visible
 f"{value:>10.2f}"             # right-aligned, width 10
 f"{name:<12}"                 # left-aligned, width 12
 f"{value:,.2f}"               # 1,234.56
