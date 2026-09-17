@@ -270,26 +270,46 @@ This is the pattern you will actually reuse at work, so it earns its place:
 ```python
 while True:
     raw = input("Enter a positive number: ")
-    if raw.replace(".", "", 1).isdigit():     # digits, with at most one dot
-        value = float(raw)
-        if value > 0:
-            break                             # good input — leave the loop
-    print("  ✗ That is not a positive number. Try again.")
+
+    try:
+        value = float(raw)           # let float() decide what is a number
+    except ValueError:
+        print("  ✗ That is not a number. Try again.")
+        continue                     # back to the condition; nothing was assigned
+
+    if value > 0:
+        break                        # good input — leave the loop
+
+    print("  ✗ The number must be greater than 0. Try again.")
 
 print(f"Thank you. You entered {value}")
 ```
 
 ```
 Enter a positive number: abc
-  ✗ That is not a positive number. Try again.
+  ✗ That is not a number. Try again.
 Enter a positive number: -5
-  ✗ That is not a positive number. Try again.
+  ✗ The number must be greater than 0. Try again.
 Enter a positive number: 3.5
 Thank you. You entered 3.5
 ```
 
 `while True:` + `break` is the right shape here: you cannot know how many wrong answers
 the user will give.
+
+**`try` / `except` is new**, and this is the smallest useful version of it: *attempt*
+`float(raw)`, and if it raises `ValueError`, print a message and go round again. You will
+see it again in [Lesson 11](../meeting-3/11-csv-and-excel.md) on every value read from a file.
+
+> **Why not test the text first?** An earlier version of this example checked
+> `raw.replace(".", "", 1).isdigit()` — "digits, with at most one dot". It reads nicely
+> and it is **wrong**, because `isdigit()` and `float()` disagree about some characters:
+> a superscript `²` is a digit to `isdigit()` but `float("²")` raises `ValueError`. The
+> check would pass and the very next line would crash.
+>
+> **The rule: do not re-implement a test that the conversion itself already performs.**
+> Try the conversion, catch the failure. That is not just shorter — it is the only
+> version that cannot disagree with itself.
 
 ▶ Run it: `python3 examples/meeting-1/04_validated_input.py`
 

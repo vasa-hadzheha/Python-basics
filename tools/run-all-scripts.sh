@@ -37,6 +37,7 @@ run examples/meeting-1/04_series_precision.py "0.5
 0.000001
 "
 run examples/meeting-1/04_validated_input.py "abc
+-5
 3.5
 "
 run examples/meeting-1/05_sum_of_logs.py "2
