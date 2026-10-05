@@ -53,10 +53,12 @@ flowchart LR
 
 1. **[SETUP.md](SETUP.md)** — install Python, create a virtual environment, run your first file. *(15 minutes, do this before Meeting 1.)*
 2. **[Meeting 1](course/meeting-1/README.md)** — begin the course.
-3. **[CHEATSHEET.md](course/CHEATSHEET.md)** — syntax reference: operators and their
+3. **[Practice sessions](course/practice/README.md)** — 50 short, marketing-themed exercises on
+   lists, tables and functions, with a hint and a full solution for each. Start these after Meeting 2.
+4. **[CHEATSHEET.md](course/CHEATSHEET.md)** — syntax reference: operators and their
    English names, what every symbol is called, and what the abbreviated names stand for.
-4. **[GLOSSARY.md](course/GLOSSARY.md)** — every term explained in one sentence, no jargon.
-5. **[OBSIDIAN.md](OBSIDIAN.md)** — reading the course in Obsidian instead of on GitHub
+5. **[GLOSSARY.md](course/GLOSSARY.md)** — every term explained in one sentence, no jargon.
+6. **[OBSIDIAN.md](OBSIDIAN.md)** — reading the course in Obsidian instead of on GitHub
    (three settings, already committed to the repo).
 
 **Presenting this to colleagues?** Two documents:
@@ -74,6 +76,7 @@ flowchart LR
 ```
 .
 ├── SETUP.md                  Install Python and run your first script
+├── OBSIDIAN.md               Reading the course in Obsidian
 ├── course/
 │   ├── CHEATSHEET.md         Syntax, symbol names, abbreviations decoded
 │   ├── GLOSSARY.md           Plain-language dictionary of terms
@@ -81,10 +84,12 @@ flowchart LR
 │   ├── APPENDIX-classes.md   Classes — optional, an eventual Meeting 4
 │   ├── meeting-1/            Lessons 01-05  + exercises
 │   ├── meeting-2/            Lessons 06-09  + exercises
-│   └── meeting-3/            Lessons 10-14  + exercises
+│   ├── meeting-3/            Lessons 10-14  + exercises
+│   └── practice/             50 short exercises: lists, tables, Excel moves, functions, a project
 ├── examples/                 Every code block from the lessons, as a runnable .py file
-├── exercise-bank/            52 exercises (statement → hint → solution)
+├── exercise-bank/            Reference solutions for every exercise (hint → solution)
 ├── data/                     Sample CSV / TXT files used by the lessons
+├── tools/                    Checks: run every script, every link, every table
 └── archive/original-labs-ua/ The original Ukrainian lab work this course was built from
 ```
 

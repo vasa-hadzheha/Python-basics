@@ -6,7 +6,7 @@ Two checks to run after editing anything in the course. Both exit non-zero on fa
 so they work in CI.
 
 ```bash
-bash tools/run-all-scripts.sh      # runs all 77 scripts, feeding stdin where needed
+bash tools/run-all-scripts.sh      # runs every script, feeding stdin where needed
 python3 tools/check-links.py       # checks every relative markdown link and #anchor
 python3 tools/check-tables.py      # checks every markdown table's column count
 ```
@@ -28,7 +28,7 @@ Expected output:
 
 ```
 ================================================
-  passed: 77    failed: 0
+  passed: <number of scripts>    failed: 0
 ================================================
 ```
 
@@ -46,7 +46,7 @@ doubled dashes where the `—` and `×` were removed.
 Expected output:
 
 ```
-checked 449 relative links across 28 files
+checked <number> relative links across <number> files
 all relative links and anchors resolve
 ```
 
@@ -67,6 +67,6 @@ phantom column on GitHub while looking fine in a plain editor:
 Expected output:
 
 ```
-checked 103 tables
+checked <number> tables
 every table has a consistent number of columns
 ```

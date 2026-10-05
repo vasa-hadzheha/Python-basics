@@ -154,9 +154,9 @@ Obsidian saves directly to the files, so your changes are real Git changes:
 
 ```bash
 git status                       # see what you touched
-bash tools/run-all-scripts.sh    # 80/80 if you changed any .py
-python3 tools/check-links.py     # 469/469 if you changed links
-python3 tools/check-tables.py    # 122/122 if you touched a table
+bash tools/run-all-scripts.sh    # failed: 0 if you changed any .py
+python3 tools/check-links.py     # 'all ... resolve' if you changed links
+python3 tools/check-tables.py    # 'consistent' if you touched a table
 git add -A && git commit -m "..." && git push
 ```
 

@@ -21,9 +21,10 @@ python3 exercise-bank/meeting-1/ex_1_03_triangle_area.py
 | [`meeting-2/`](meeting-2/) | 15 solutions for [16 tasks](../course/meeting-2/exercises.md) | lists, tables, functions, dicts |
 | [`meeting-3/`](meeting-3/) | 12 solutions for [12 tasks](../course/meeting-3/exercises.md) | files, CSV, SQL, ETL, code review |
 | [`appendix-classes/`](appendix-classes/) | 9 solutions for [9 tasks](../course/APPENDIX-classes.md) | classes (optional) |
+| [`practice/`](practice/) | 5 files holding the solutions to [50 short exercises](../course/practice/README.md) | lists, tables, Excel moves, functions, a project |
 
-**50 reference solutions.** Every one runs, and most end with an `assert` suite that
-passes.
+**50 reference solutions for the labs, plus 50 for the practice sessions.** Every one runs,
+and most end with an `assert` suite that passes.
 
 ### How to use them
 

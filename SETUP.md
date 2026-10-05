@@ -66,7 +66,7 @@ cd Python-basics
 > git checkout claude/confident-fermi-euzrrg
 > ```
 >
-> Check you are in the right place — this must print `passed: 80`:
+> Check you are in the right place — the last line must say `failed: 0`:
 >
 > ```bash
 > bash tools/run-all-scripts.sh

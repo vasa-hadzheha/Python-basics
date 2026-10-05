@@ -112,6 +112,16 @@ Then fix it to `return` and show `x * 10` working. The penny drops audibly.
 **Success test:** they can write a function that takes a list of dicts and returns a
 filtered list.
 
+**Extra practice for this meeting:** the [practice sessions](practice/README.md) are 50
+short exercises (lists, tables, Excel-style moves, functions) on a pretend online shop,
+each with a hint and a full solution. Good as homework between Meetings 2 and 3:
+
+| If the group is... | Give them |
+|--------------------|-----------|
+| comfortable with lists | start at [Session 2: Tables](practice/02-tables.md) |
+| mostly Excel users | [Session 3: Excel moves](practice/03-excel-moves.md): every exercise is an Excel formula they already know |
+| ready to build things | [Session 5: the campaign report](practice/05-campaign-report.md) as a group exercise in the last hour |
+
 ---
 
 ## Meeting 3 — Real data (3 h)

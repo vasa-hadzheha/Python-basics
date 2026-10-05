@@ -575,5 +575,8 @@ logic into functions you would be happy to have reviewed.**
 Exercise 2.16 is the one that matters most — it is a genuine work task, and the
 dict-keyed comparison in it is a pattern you will use every week.
 
+**Want more practice first?** [Practice sessions](../practice/README.md): 50 shorter,
+easier exercises on lists, tables and functions, themed around marketing data.
+
 ➡ **[Meeting 3: Real data](../meeting-3/README.md)** — where the data stops being typed
 in and starts coming from files and databases.

@@ -65,4 +65,8 @@ name. That is the shape almost all of Meeting 3 works with, and it is the shape
 You need [Meeting 1](../meeting-1/README.md) — specifically `for` loops and `if`.
 Everything here is those two ideas applied to collections.
 
+**Want more practice afterwards?** The [practice sessions](../practice/README.md) continue
+from here: 50 short exercises about a pretend online shop (likes, prices, sales, ad campaigns),
+covering lists, tables, Excel-style moves and functions, each with a hint and a full solution.
+
 ➡ **Start with [Lesson 6: Lists](06-lists.md)**

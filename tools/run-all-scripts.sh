@@ -213,6 +213,17 @@ run $B/ex_a_06_matrix.py ""
 run $B/ex_a_07_box_inheritance.py ""
 run $B/ex_a_08_circle_cone.py ""
 run $B/ex_a_09_prism.py ""
+# ---- practice sessions (exercise-bank/practice) ----
+B=exercise-bank/practice
+run $B/practice_01_lists.py "3
+100
+250
+40
+"
+run $B/practice_02_tables.py ""
+run $B/practice_03_excel_moves.py ""
+run $B/practice_04_functions.py ""
+run $B/practice_05_campaign_report.py ""
 echo ""
 echo "================================================"
 echo "  passed: $pass    failed: $fail"

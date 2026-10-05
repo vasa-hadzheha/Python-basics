@@ -13,7 +13,7 @@ out, every output shown, every deliberate mistake marked.
 
 ## Pre-flight — the evening before
 
-- [ ] `git clone` the repo fresh and run `bash tools/run-all-scripts.sh` — expect `passed: 80`
+- [ ] `git clone` the repo fresh and run `bash tools/run-all-scripts.sh` — expect `failed: 0` on the last line
 - [ ] Terminal font at **18pt or bigger**. Test it from the back of the room
 - [ ] Terminal colours: light background is easier to project than dark
 - [ ] `python3 --version` works, and `cd` into the repo root
